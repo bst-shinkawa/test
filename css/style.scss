@@ -1,0 +1,887 @@
+// =========================
+// 変数・ベーススタイル
+// =========================
+
+$color-primary: #022fad;
+$color-primary-dark: #002aaf;
+$color-accent: #f6d860;
+$color-bg-light: #f2f6fb;
+$color-bg-muted: #ededed;
+$color-text-main: #333333;
+$color-text-invert: #ffffff;
+$color-danger: #b00000;
+$font-base: "Noto Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+$bp-sp: 767px;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body.site-full {
+  font-family: $font-base;
+  color: $color-text-main;
+  background-color: #ffffff;
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-inline: 16px;
+}
+
+// 共通ボタン
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 32px;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 600;
+  border: 2px solid transparent;
+  white-space: nowrap;
+  cursor: pointer;
+
+  &--primary {
+    background-color: $color-primary;
+    border-color: $color-primary;
+    color: $color-text-invert;
+  }
+
+  &--outline {
+    background-color: #ffffff;
+    border-color: $color-primary;
+    color: $color-primary;
+  }
+
+  &--more {
+    min-width: 200px;
+  }
+
+  &--entry {
+    background-color: #7d7d7d;
+    border-radius: 202px;
+    font-size: 20px;
+    font-weight: 700;
+    padding-block: 18px;
+    width: 100%;
+    max-width: 400px;
+    color: $color-text-invert;
+  }
+}
+
+// =========================
+// ヒーロー（fv）
+// =========================
+
+.hero {
+  position: relative;
+  background-color: $color-primary;
+  background-image: url("../pencil/image/bg.png");
+  background-size: cover;
+  background-position: center;
+  color: $color-text-invert;
+  padding: 32px 0 64px;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    gap: 56px;
+  }
+
+  &__content {
+    flex: 1 1 0;
+    max-width: 540px;
+  }
+
+  &__logo {
+    margin-bottom: 24px;
+    img {
+      height: 50px;
+      width: auto;
+    }
+  }
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 30px;
+    border-radius: 58px;
+    background-color: #ffffff;
+    color: $color-primary;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  &__lead {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 0 12px;
+  }
+
+  &__brand {
+    font-size: 48px;
+    font-weight: 800;
+    margin: 0 0 4px;
+  }
+
+  &__brand-kana {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 24px;
+  }
+
+  &__points {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-bottom: 24px;
+
+    .hero__point-image {
+      width: 245px;
+      max-width: 48%;
+    }
+  }
+
+  &__note {
+    font-size: 13px;
+    margin: 0;
+  }
+
+  &__visual {
+    flex: 1 1 0;
+    min-width: 0;
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+}
+
+// =========================
+// CTA セクション
+// =========================
+
+.cta {
+  background-color: $color-bg-light;
+  transform: rotate(-0.45deg); // デザインの微妙な傾きを反映
+  margin-block: 40px;
+
+  &__inner {
+    transform: rotate(0.45deg); // テキストを水平に戻す
+    padding-block: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+  }
+
+  &__copy {
+    flex: 1 1 0;
+  }
+
+  &__title {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    color: $color-text-main;
+  }
+
+  &__subtitle {
+    font-size: 16px;
+    margin: 0;
+    color: $color-text-main;
+  }
+
+  &__buttons {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 350px;
+    width: 100%;
+  }
+}
+
+// =========================
+// 特徴セクション（Point1〜3）
+// =========================
+
+.features {
+  background-color: #ffffff;
+  padding: 60px 0;
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+  }
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+
+  &--right {
+    flex-direction: row-reverse;
+  }
+
+  &__text {
+    flex: 1 1 0;
+    color: $color-text-invert;
+  }
+
+  &__label {
+    font-size: 26px;
+    font-weight: 700;
+    margin: 0 0 8px;
+  }
+
+  &__title {
+    font-size: 40px;
+    font-weight: 700;
+    margin: 0 0 12px;
+  }
+
+  &__description {
+    font-size: 19px;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  &__visual {
+    flex: 1 1 0;
+    max-width: 400px;
+  }
+
+  // 背景色は index.pen の各 frame に合わせて切り替え
+  &--left:nth-of-type(1),
+  &--left:nth-of-type(3) {
+    background-color: $color-primary;
+    border-radius: 0 100px 0 0;
+    padding: 60px 50px;
+  }
+
+  &--right {
+    background-color: #224ab5;
+    border-radius: 100px 0 0 0;
+    padding: 60px 50px;
+  }
+}
+
+// =========================
+// 事例紹介
+// =========================
+
+.cases {
+  padding: 80px 0;
+  background-color: #ffffff;
+
+  &__inner {
+    text-align: center;
+  }
+
+  &__eyebrow {
+    font-size: 32px;
+    font-weight: 700;
+    color: $color-primary;
+    margin: 0 0 8px;
+  }
+
+  &__title {
+    font-size: 40px;
+    font-weight: 700;
+    margin: 0 0 40px;
+  }
+
+  &__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  &__more {
+    text-align: center;
+  }
+}
+
+.case-card {
+  background-color: #ffffff;
+  border-radius: 15px;
+  border: 1px solid $color-primary;
+  overflow: hidden;
+  max-width: 299px;
+  flex: 1 1 0;
+  text-align: left;
+
+  &__image {
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &__body {
+    padding: 20px 15px 24px;
+  }
+
+  &__name {
+    font-size: 22px;
+    font-weight: 700;
+    color: $color-primary;
+    margin: 0 0 8px;
+  }
+
+  &__description {
+    font-size: 16px;
+    margin: 0 0 16px;
+  }
+
+  &__tag {
+    display: inline-block;
+    padding: 8px 24px;
+    border-radius: 15px 0 0 0;
+    background-color: $color-primary;
+    color: $color-text-invert;
+    font-size: 18px;
+    font-weight: 700;
+    position: relative;
+    left: calc(100% - 120px);
+  }
+}
+
+// =========================
+// オプションプラン
+// =========================
+
+.options {
+  padding: 80px 0;
+  background-color: $color-bg-light;
+
+  &__inner {
+    text-align: center;
+  }
+
+  &__title {
+    font-size: 40px;
+    font-weight: 700;
+    margin: 0 0 24px;
+  }
+
+  &__description {
+    font-size: 18px;
+    margin: 0 auto 40px;
+    max-width: 780px;
+  }
+
+  &__list {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  &__cta {
+    text-align: center;
+  }
+}
+
+.option-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: 2px solid $color-primary-dark;
+  padding: 32px 24px 28px;
+  text-align: center;
+  width: 100%;
+  max-width: 300px;
+  position: relative;
+
+  &__badge {
+    position: absolute;
+    top: 22px;
+    left: 0;
+    background-color: $color-primary;
+    color: $color-text-invert;
+    border-radius: 0 50px 50px 0;
+    padding: 8px 18px;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  &__category {
+    font-size: 18px;
+    font-weight: 500;
+    color: $color-primary;
+    margin: 40px 0 8px;
+  }
+
+  &__name {
+    font-size: 24px;
+    font-weight: 600;
+    color: $color-primary;
+    margin: 0 0 16px;
+  }
+
+  &__recommend {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 16px;
+  }
+
+  &__text {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.7;
+    margin: 0 0 16px;
+  }
+
+  &__price {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 4px;
+    margin-top: 8px;
+  }
+
+  &__yen {
+    font-size: 30px;
+  }
+
+  &__amount {
+    font-size: 45px;
+    font-weight: 600;
+  }
+
+  &__unit {
+    font-size: 25px;
+    font-weight: 600;
+  }
+
+  &__note {
+    font-size: 12px;
+    margin-top: 12px;
+  }
+
+  &--featured {
+    border-width: 4px;
+  }
+}
+
+// =========================
+// エントリー（ダウンロードフォーム）
+// =========================
+
+.entry {
+  padding: 80px 0;
+  background-image: url("../pencil/image/bg.png");
+  background-size: cover;
+  background-position: center;
+  color: $color-text-invert;
+  text-align: center;
+
+  &__inner {
+    max-width: 1000px;
+  }
+
+  &__title {
+    font-size: 40px;
+    font-weight: 700;
+    margin: 0 0 16px;
+  }
+
+  &__description {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 32px;
+  }
+
+  &__panel {
+    margin: 0 auto;
+    max-width: 800px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 5px solid $color-accent;
+    padding: 40px 40px 32px;
+    color: $color-text-main;
+  }
+
+  &__terms-header {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #333333;
+    padding-bottom: 4px;
+  }
+
+  &__terms-link {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 16px;
+  }
+
+  &__form-row {
+    &--checkbox {
+      text-align: left;
+    }
+  }
+
+  &__checkbox-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  &__checkbox-input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &__checkbox-box {
+    width: 15px;
+    height: 15px;
+    border-radius: 2px;
+    border: 1px solid $color-primary-dark;
+    background-color: #ffffff;
+  }
+
+  &__checkbox-input:checked + &__checkbox-box {
+    background-color: $color-primary-dark;
+  }
+
+  &__checkbox-text {
+    color: $color-text-main;
+  }
+
+  &__field {
+    display: block;
+    background-color: #f4d5d5;
+    border-radius: 10px;
+    border: 1px solid #333333;
+    padding: 12px 16px;
+    text-align: left;
+  }
+
+  &__field-label {
+    display: block;
+    font-size: 16px;
+    color: #6f6f6f;
+    margin-bottom: 4px;
+  }
+
+  &__field-input {
+    width: 100%;
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    outline: none;
+  }
+}
+
+// =========================
+// インストール手順
+// =========================
+
+.install {
+  padding: 60px 0;
+  background-color: #ffffff;
+
+  &__inner {
+    text-align: center;
+  }
+
+  &__title {
+    font-size: 40px;
+    font-weight: 700;
+    margin: 0 0 40px;
+  }
+
+  &__steps {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+  }
+}
+
+.install-step {
+  width: 100%;
+  max-width: 280px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: 1px solid $color-primary;
+  padding: 40px 16px 32px;
+  position: relative;
+
+  &__number {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: $color-primary;
+    color: $color-text-invert;
+    font-size: 46px;
+    font-weight: 700;
+    margin: 0 auto 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__title {
+    font-size: 24px;
+    font-weight: 600;
+    color: $color-primary;
+    margin: 0 0 16px;
+  }
+
+  &__description {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.7;
+    margin: 0;
+  }
+}
+
+// =========================
+// Q&A
+// =========================
+
+.faq {
+  padding: 80px 0;
+  background-color: $color-bg-light;
+
+  &__inner {
+    max-width: 1000px;
+  }
+
+  &__title {
+    font-size: 40px;
+    font-weight: 700;
+    text-align: center;
+    margin: 0 0 32px;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__item {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 24px;
+  }
+
+  &__item--active {
+    min-height: 200px;
+  }
+
+  &__question {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__label {
+    font-size: 40px;
+    font-weight: 700;
+
+    &--q {
+      color: $color-primary-dark;
+    }
+
+    &--a {
+      color: $color-danger;
+    }
+  }
+
+  &__question-text {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  &__answer {
+    margin-top: 16px;
+  }
+
+  &__answer-main {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__answer-text {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  &__terms-link {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 22px;
+    color: $color-danger;
+    border-bottom: 2px solid $color-danger;
+  }
+}
+
+// =========================
+// レスポンシブ（〜767px）
+// =========================
+
+@media (max-width: $bp-sp) {
+  .hero {
+    padding: 24px 0 40px;
+
+    &__inner {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    &__content {
+      max-width: none;
+    }
+
+    &__points {
+      justify-content: center;
+
+      .hero__point-image {
+        max-width: 45%;
+      }
+    }
+
+    &__visual {
+      max-width: 80%;
+      margin: 0 auto;
+    }
+
+    &__brand {
+      font-size: 36px;
+    }
+
+    &__lead {
+      font-size: 24px;
+    }
+  }
+
+  .cta {
+    transform: none;
+
+    &__inner {
+      transform: none;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    &__buttons {
+      width: 100%;
+      max-width: none;
+
+      .btn {
+        width: 100%;
+      }
+    }
+  }
+
+  .feature {
+    flex-direction: column !important; // left/right どちらも縦積み
+    padding: 40px 20px;
+
+    &__visual {
+      max-width: 100%;
+    }
+
+    &__title {
+      font-size: 28px;
+    }
+  }
+
+  .cases {
+    &__row {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  .options {
+    &__list {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &__description {
+      font-size: 16px;
+    }
+  }
+
+  .entry {
+    &__panel {
+      padding: 24px 16px;
+    }
+
+    &__title {
+      font-size: 28px;
+    }
+
+    &__description {
+      font-size: 16px;
+    }
+  }
+
+  .install {
+    &__steps {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  .faq {
+    &__question-text {
+      font-size: 20px;
+    }
+
+    &__answer-text,
+    &__terms-link {
+      font-size: 16px;
+    }
+  }
+}
