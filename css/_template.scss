@@ -1,0 +1,247 @@
+//ベースカラー（必要あれば）
+$m-color: #fff; //メインカラー
+$s-color: #000; //サブカラー
+$b-color: #555; //ボーダーカラー
+
+//オートレイアウト
+@mixin wrap($width, $max: null) {
+  width: $width;
+  @if $max != null {
+    max-width: $max;
+  }
+  margin-inline: auto;
+}
+
+// ブレークポイント
+$bp: (
+  sp: 768,
+  tab: 1080,
+  pc: 1200
+);
+
+@mixin bp($key) {
+  @media (max-width: #{map-get($bp, $key)}px) {
+    @content;
+  }
+}
+
+// 使用例
+// --------------------------------------
+// @include bp(sp){
+//    font-size:10px;
+//}
+// --------------------------------------
+
+
+// ==============================
+// Fluid Font Size Map Generator
+// ------------------------------
+// 自動生成レンジ：12〜100px
+// clampで自然な拡大・縮小を実現
+// ==============================
+
+// ------------------------------------------------------------
+// 設定
+// ------------------------------------------------------------
+
+$font-min: 12;
+$font-max: 100;
+
+// ビューポート設定（目安）
+$min-vw: 390;   // スマホ最小幅
+$max-vw: 1200;  // PC最大幅
+
+// fluid計算時のベースvw
+$vw-pc-base: 10; // PC側は10vwを基準にスケーリング
+$vw-sp-base: 15; // SP側は15vwを基準にスケーリング
+
+// ------------------------------------------------------------
+// 自動生成マップ
+// ------------------------------------------------------------
+$font-sizes: ();
+
+@for $i from $font-min through $font-max {
+  // --- PC ---
+  $pc-min: $i * 0.8;
+  $pc-vw: calc(#{$i / 100 * $vw-pc-base} * 1vw);
+  $pc-max: $i;
+
+  // --- SP ---
+  $sp-min: $i * 0.8;
+  $sp-vw: calc(#{$i / 100 * $vw-sp-base} * 1vw);
+  $sp-max: $i;
+
+  $font-sizes: map-merge(
+    $font-sizes,
+    (
+      $i: (
+        pc: (
+          min: #{$pc-min}px,
+          fluid: #{$pc-vw},
+          max: #{$pc-max}px
+        ),
+        sp: (
+          min: #{$sp-min}px,
+          fluid: #{$sp-vw},
+          max: #{$sp-max}px
+        )
+      )
+    )
+  );
+}
+
+@mixin f-s($pc-key, $sp-key: null) {
+  @if $sp-key == null {
+    // 単一指定（PC/SP共通）
+    $map: map-get($font-sizes, $pc-key);
+    @if $map {
+      font-size: clamp(
+        map-get(map-get($map, pc), min),
+        map-get(map-get($map, pc), fluid),
+        map-get(map-get($map, pc), max)
+      );
+    }
+  } @else {
+    // PC / SP 個別指定
+    @media (min-width: 769px) {
+      $map: map-get($font-sizes, $pc-key);
+      @if $map {
+        font-size: clamp(
+          map-get(map-get($map, pc), min),
+          map-get(map-get($map, pc), fluid),
+          map-get(map-get($map, pc), max)
+        );
+      }
+    }
+    @include bp(sp) {
+      $map: map-get($font-sizes, $sp-key);
+      @if $map {
+        font-size: clamp(
+          map-get(map-get($map, sp), min),
+          map-get(map-get($map, sp), fluid),
+          map-get(map-get($map, sp), max)
+        );
+      }
+    }
+  }
+}
+
+// 使用例
+// --------------------------------------
+// .heading { @include f-size(32); }
+// .lead { @include f-size(18); }
+// .cta-button { @include f-size(15); }
+// --------------------------------------
+
+
+//flex
+//2カラム専用
+@mixin flex($left, $right, $gap) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+
+  &_left {
+    flex: 0 0 $left;
+    @include bp(sp) {
+       flex: 0 0 100%;
+    }
+  }
+
+  &_right {
+    flex: 0 0 $right;
+    @include bp(sp) {
+       flex: 0 0 100%;
+    }
+  }
+  
+}
+// 使用例
+// --------------------------------------
+// .block{
+//    @include flex(49%,49%,2%);
+// }
+// --------------------------------------
+
+
+//3カラム以降用(同じブロック生成)
+@mixin flex-($count, $gap) { 
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: $gap;
+
+  &_item {
+    width: calc((100% - (#{$gap} * (#{$count} - 1)) ) / #{$count}); 
+    @include bp(sp) {
+       width: 100%;
+    }
+  } 
+}
+
+// 使用例
+// --------------------------------------
+// .block{
+//    @include flex(3,2%);
+// }
+// --------------------------------------
+
+
+
+//grid
+@mixin grid($min, $gap, $max: 1fr) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax($min, $max));
+  gap: $gap;
+
+}
+// 使用例
+// --------------------------------------
+// @include grid(250px,3%); 
+// --------------------------------------
+
+
+
+//スペース用
+@mixin s($sp-val, $pc-val, $prop) {
+  // プロパティ名変換
+  @if $prop == p-t {
+    $property: padding-top;
+  } @else if $prop == p-b {
+    $property: padding-bottom;
+  } @else if $prop == p-l {
+    $property: padding-left;
+  } @else if $prop == p-r {
+    $property: padding-right;
+  } @else if $prop == p-block {
+    $property: padding-block;
+  } @else if $prop == p-inline {
+    $property: padding-inline;
+  } @else if $prop == m-t {
+    $property: margin-top;
+  } @else if $prop == m-b {
+    $property: margin-bottom;
+  } @else if $prop == m-l {
+    $property: margin-left;
+  } @else if $prop == m-r {
+    $property: margin-right;
+  } @else if $prop == m-block {
+    $property: margin-block;
+  } @else if $prop == m-inline {
+    $property: margin-inline;
+  } @else {
+    $property: $prop;
+  }
+
+  // SP値（デフォルト）
+  #{$property}: $sp-val;
+
+  // PC値
+  @media (min-width: 769px) {
+    #{$property}: $pc-val;
+  }
+}
+
+// 使用例
+// --------------------------------------
+// @include space(15px, 20px, p-t);
+// --------------------------------------
